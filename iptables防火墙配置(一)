@@ -1,0 +1,13 @@
+---
+- name:
+  hosts: 10.154.145.139
+  tasks:
+  - name:
+    iptables:
+      chain: 4A
+      source: 10.159.17.177
+      jump:  ACCEPT
+    become: yes
+
+  - name:
+    shell: iptables-save > /etc/sysconfig/iptables.rules
