@@ -1,0 +1,14 @@
+---
+- name: iptables -A ComGroup -m iprange --src-range 10.154.X.X-10.154.X.X  -p tcp -j ACCEPT --dport 22
+  hosts: bomc
+  tasks:
+  - name:
+    iptables:
+      chain: ComGroup
+      src_range: 10.19.14.107-10.19.10.114
+      protocol: tcp
+      destination_port: 22
+      jump:  ACCEPT
+    become: yes
+  - name:
+    shell: iptables-save > /etc/sysconfig/iptables.rules
