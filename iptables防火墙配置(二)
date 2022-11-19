@@ -1,0 +1,15 @@
+---
+- name: 防火墙配置
+  hosts: 10.154.145.139
+  tasks:
+  - name:
+    iptables:
+      chain: 4A
+      source: 10.159.17.177
+      protocol: tcp
+      destination_port: 22
+      jump:  ACCEPT
+    become: yes
+
+  - name:
+    shell: iptables-save > /etc/sysconfig/iptables.rules
